@@ -11,39 +11,17 @@ import '../../features/onboarding/presentation/screens/discover_dots_screen.dart
 import '../../features/onboarding/presentation/screens/learner_profile_screen.dart';
 import '../../features/learning/presentation/screens/dashboard_screen.dart';
 import '../../features/learning/presentation/screens/lesson_player_screen.dart';
+import '../../features/parent/presentation/screens/pin_auth_screen.dart';
 
 // Placeholder screens for Teacher and Parent isolation
 class TeacherDashboard extends StatelessWidget {
   const TeacherDashboard({super.key});
-  @override Widget build(BuildContext context) => const Scaffold(body: Center(child: Text("Teacher Dashboard")));
+  @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Teacher')), body: const Center(child: Text("Teacher Dashboard (Data Table implementation pending)")));
 }
 
 class ParentDashboard extends StatelessWidget {
   const ParentDashboard({super.key});
-  @override Widget build(BuildContext context) => const Scaffold(body: Center(child: Text("Parent Dashboard")));
-}
-
-class PinAuthScreen extends ConsumerWidget {
-  final String userType; // 'teacher' or 'parent'
-  const PinAuthScreen({super.key, required this.userType});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-      return Scaffold(
-          body: Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                      if (userType == 'teacher') {
-                          ref.read(authProvider.notifier).authenticateTeacher("1234");
-                      } else {
-                          ref.read(authProvider.notifier).authenticateParent("5678");
-                      }
-                  },
-                  child: Text("Authenticate $userType (Mock)")
-              )
-          )
-      );
-  }
+  @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Parent')), body: const Center(child: Text("Parent Dashboard (Consent & Settings implementation pending)")));
 }
 
 // Global keys for nested routing isolation
@@ -55,7 +33,6 @@ final _parentNavigatorKey = GlobalKey<NavigatorState>();
 final routerProvider = Provider<GoRouter>((ref) {
   // Use a redirect that reads the current state rather than watching it directly
   // to avoid recreating the GoRouter instance.
-  // A refreshListenable should ideally be attached if using GoRouter's built-in refresh.
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
