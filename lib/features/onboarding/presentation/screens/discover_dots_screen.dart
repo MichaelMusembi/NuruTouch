@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/localization/localization_provider.dart';
 
-class DiscoverDotsScreen extends StatelessWidget {
+class DiscoverDotsScreen extends ConsumerWidget {
   const DiscoverDotsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localizationAsyncValue = ref.watch(localizationServiceProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Discover Dots', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+        title: localizationAsyncValue.when(
+          data: (loc) => Text(loc.getOnboarding('discover_title'), style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+          loading: () => const Text('...'),
+          error: (_,__) => const Text('Error'),
+        ),
         centerTitle: true,
       ),
       body: Padding(

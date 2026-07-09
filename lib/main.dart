@@ -6,18 +6,20 @@ void main() {
   runApp(const ProviderScope(child: NuruTouchApp()));
 }
 
-class NuruTouchApp extends StatelessWidget {
+class NuruTouchApp extends ConsumerWidget {
   const NuruTouchApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       title: 'NuruTouch',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      routerConfig: goRouter,
+      routerConfig: router,
     );
   }
 }

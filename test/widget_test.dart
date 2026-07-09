@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   testWidgets('Splash screen test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(const ProviderScope(child: NuruTouchApp()));
-
-    // Verify that the splash screen shows NuruTouch.
-    expect(find.text('NuruTouch'), findsWidgets);
-
+    // Let FutureProvider resolve
     await tester.pumpAndSettle(const Duration(seconds: 3));
+
+    // After resolving and navigating we are on the language screen
+    // The language title from the localization should be there
+    expect(find.text('Select Language'), findsWidgets);
   });
 }
