@@ -53,7 +53,9 @@ final _teacherNavigatorKey = GlobalKey<NavigatorState>();
 final _parentNavigatorKey = GlobalKey<NavigatorState>();
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
+  // Use a redirect that reads the current state rather than watching it directly
+  // to avoid recreating the GoRouter instance.
+  // A refreshListenable should ideally be attached if using GoRouter's built-in refresh.
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
@@ -115,7 +117,7 @@ final routerProvider = Provider<GoRouter>((ref) {
              path: '/teacher/dashboard',
              builder: (context, state) => const TeacherDashboard(),
              redirect: (context, state) {
-                 if (!authState.isTeacherAuthenticated) {
+                 if (!ref.read(authProvider).isTeacherAuthenticated) {
                      return '/auth/teacher';
                  }
                  return null;
@@ -137,7 +139,7 @@ final routerProvider = Provider<GoRouter>((ref) {
              path: '/parent/dashboard',
              builder: (context, state) => const ParentDashboard(),
              redirect: (context, state) {
-                 if (!authState.isParentAuthenticated) {
+                 if (!ref.read(authProvider).isParentAuthenticated) {
                      return '/auth/parent';
                  }
                  return null;
@@ -148,6 +150,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
     // Redirect globally if auth state changes while sitting on an auth screen
     redirect: (context, state) {
+        final authState = ref.read(authProvider);
         if (state.matchedLocation == '/auth/teacher' && authState.isTeacherAuthenticated) {
             return '/teacher/dashboard';
         }

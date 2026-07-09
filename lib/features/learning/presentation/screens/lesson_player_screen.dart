@@ -21,15 +21,15 @@ class LessonPlayerScreen extends BlindFirstScreen {
   Widget buildContent(BuildContext context, WidgetRef ref) {
     final lessonState = ref.watch(curriculumEngineProvider);
 
-    // Initial injection. Trigger evaluation logic if phase just entered
-    Future.microtask(() async {
-        if (!lessonState.isCompleted) {
-           ref.read(teacherAminaEngineProvider).evaluateContextAndSpeak(lessonState.currentPhase);
-        } else {
+    // Use ref.listen to trigger side-effects outside of the build method
+    ref.listen(curriculumEngineProvider, (previous, next) async {
+       if (previous?.currentPhase != next.currentPhase && !next.isCompleted) {
+           ref.read(teacherAminaEngineProvider).evaluateContextAndSpeak(next.currentPhase);
+       } else if (next.isCompleted) {
            // Lesson is over, save progress and exit
            final repo = ref.read(learningRepositoryProvider);
            await repo.saveProgress(ProgressEntry(
-               letter: lessonState.currentLessonId,
+               letter: next.currentLessonId,
                masteryScore: 100, // Mock mastery bump
                attempts: 1,
                lastReviewed: DateTime.now().toIso8601String()
@@ -38,7 +38,7 @@ class LessonPlayerScreen extends BlindFirstScreen {
            if(context.mounted) {
               context.go('/learner/home');
            }
-        }
+       }
     });
 
     return Center(
