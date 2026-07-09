@@ -1,26 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/localization/localization_provider.dart';
-
-// State model for the Curriculum Engine
-class LessonState {
-  final String currentLessonId;
-  final int currentPhase;
-  final bool isCompleted;
-
-  LessonState({
-    required this.currentLessonId,
-    this.currentPhase = 1,
-    this.isCompleted = false,
-  });
-
-  LessonState copyWith({String? currentLessonId, int? currentPhase, bool? isCompleted}) {
-    return LessonState(
-      currentLessonId: currentLessonId ?? this.currentLessonId,
-      currentPhase: currentPhase ?? this.currentPhase,
-      isCompleted: isCompleted ?? this.isCompleted,
-    );
-  }
-}
+import '../models/lesson_state_machine.dart';
 
 class CurriculumEngine extends Notifier<LessonState> {
   @override
@@ -29,19 +9,18 @@ class CurriculumEngine extends Notifier<LessonState> {
   }
 
   Future<void> startLesson(String lessonId) async {
-    final locServiceAsync = ref.read(localizationServiceProvider);
     final locale = ref.read(localeProvider);
 
-    // Load lesson data dynamically
-    locServiceAsync.whenData((locService) async {
-        await locService.loadLessonNarration(locale, lessonId);
-        state = LessonState(currentLessonId: lessonId, currentPhase: 1);
-    });
+    // Await the future directly to block execution until loaded
+    final locService = await ref.read(localizationServiceProvider.future);
+
+    await locService.loadLessonNarration(locale, lessonId);
+    state = LessonState(currentLessonId: lessonId, currentPhase: LessonPhase.welcome);
   }
 
   void advancePhase() {
-    if (state.currentPhase < 16) {
-      state = state.copyWith(currentPhase: state.currentPhase + 1);
+    if (state.currentPhase.index < LessonPhase.values.length - 1) {
+      state = state.copyWith(currentPhase: LessonPhase.values[state.currentPhase.index + 1]);
     } else {
       state = state.copyWith(isCompleted: true);
     }
