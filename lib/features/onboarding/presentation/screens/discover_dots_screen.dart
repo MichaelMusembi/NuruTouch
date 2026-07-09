@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/localization/localization_provider.dart';
+import '../../../../core/design/design_tokens.dart';
+import '../../../learning/presentation/widgets/blind_first_screen.dart';
+import '../../../../core/services/haptic_language.dart';
 
-class DiscoverDotsScreen extends ConsumerWidget {
+class DiscoverDotsScreen extends BlindFirstScreen {
   const DiscoverDotsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void onSwipeRight(BuildContext context, WidgetRef ref) {
+    super.onSwipeRight(context, ref);
+    context.go('/profile-setup');
+  }
+
+  @override
+  Widget buildContent(BuildContext context, WidgetRef ref) {
     final localizationAsyncValue = ref.watch(localizationServiceProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: localizationAsyncValue.when(
-          data: (loc) => Text(loc.getOnboarding('discover_title'), style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+          data: (loc) => Text(loc.getOnboarding('discover_title'), style: DesignTokens.textHeading),
           loading: () => const Text('...'),
           error: (_,__) => const Text('Error'),
         ),
@@ -26,22 +36,22 @@ class DiscoverDotsScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildDot(),
-                _buildDot(),
+                _buildDot(context, ref, 1),
+                _buildDot(context, ref, 4),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildDot(),
-                _buildDot(),
+                _buildDot(context, ref, 2),
+                _buildDot(context, ref, 5),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildDot(),
-                _buildDot(),
+                _buildDot(context, ref, 3),
+                _buildDot(context, ref, 6),
               ],
             ),
           ],
@@ -50,13 +60,19 @@ class DiscoverDotsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDot() {
-    return Container(
-      width: 100,
-      height: 100,
-      decoration: const BoxDecoration(
-        color: Color(0xFF1a1c29),
-        shape: BoxShape.circle,
+  Widget _buildDot(BuildContext context, WidgetRef ref, int dotNumber) {
+    return GestureDetector(
+      onTap: () {
+          ref.read(hapticLanguageProvider).playNavigate();
+          // In a real app we'd announce "Dot $dotNumber" here via AudioManager
+      },
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: const BoxDecoration(
+          color: DesignTokens.colorDotInactive,
+          shape: BoxShape.circle,
+        ),
       ),
     );
   }

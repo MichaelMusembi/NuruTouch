@@ -1,0 +1,24 @@
+{
+  "_schema": "Canonical NuruTouch Content Architecture",
+  "course": {
+    "id": "braille_foundations",
+    "title_key": "course_braille_foundations",
+    "units": [
+      {
+        "id": "unit_1_alphabet",
+        "title_key": "unit_alphabet",
+        "lessons": [
+          {
+            "id": "lesson_a",
+            "concept_type": "letter",
+            "letter": "A",
+            "braille_dots": [1],
+            "dot_count": 1,
+            "difficulty": "Beginner",
+            "estimated_duration": "8-12 minutes"
+          }
+        ]
+      }
+    ]
+  }
+}

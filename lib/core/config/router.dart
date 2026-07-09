@@ -8,6 +8,9 @@ import '../../features/onboarding/presentation/screens/language_selection_screen
 import '../../features/onboarding/presentation/screens/device_orientation_screen.dart';
 import '../../features/onboarding/presentation/screens/spatial_training_screen.dart';
 import '../../features/onboarding/presentation/screens/discover_dots_screen.dart';
+import '../../features/onboarding/presentation/screens/learner_profile_screen.dart';
+import '../../features/learning/presentation/screens/dashboard_screen.dart';
+import '../../features/learning/presentation/screens/lesson_player_screen.dart';
 
 // Placeholder screens for Teacher and Parent isolation
 class TeacherDashboard extends StatelessWidget {
@@ -78,6 +81,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/discover',
         builder: (context, state) => const DiscoverDotsScreen(),
       ),
+      GoRoute(
+        path: '/profile-setup',
+        builder: (context, state) => const LearnerProfileScreen(),
+      ),
 
       // Learner Branch (Isolated)
       ShellRoute(
@@ -86,7 +93,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         routes: [
            GoRoute(
              path: '/learner/home',
-             builder: (context, state) => const Center(child: Text("Learner Home")),
+             builder: (context, state) => const DashboardScreen(),
+           ),
+           GoRoute(
+             path: '/learner/lesson',
+             builder: (context, state) => const LessonPlayerScreen(),
            ),
         ]
       ),

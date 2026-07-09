@@ -2,49 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/localization/localization_provider.dart';
+import '../../../../core/design/design_tokens.dart';
+import '../../../learning/presentation/widgets/blind_first_screen.dart';
 
-class DeviceOrientationScreen extends ConsumerWidget {
+class DeviceOrientationScreen extends BlindFirstScreen {
   const DeviceOrientationScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void onSwipeRight(BuildContext context, WidgetRef ref) {
+    super.onSwipeRight(context, ref);
+    context.go('/spatial');
+  }
+
+  @override
+  Widget buildContent(BuildContext context, WidgetRef ref) {
     final localizationAsyncValue = ref.watch(localizationServiceProvider);
 
-    return Scaffold(
-      body: InkWell(
-        onTap: () => context.go('/spatial'),
-        child: localizationAsyncValue.when(
-          data: (localizationService) => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 80,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Icon(Icons.lock, color: Colors.white, size: 40),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Text(
-                  localizationService.getOnboarding('orientation_title'),
-                  style: const TextStyle(
-                    color: Colors.blue,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+    return localizationAsyncValue.when(
+      data: (localizationService) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 80,
+              height: 120,
+              decoration: BoxDecoration(
+                color: DesignTokens.colorPrimary,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Center(
+                child: Icon(Icons.lock, color: Colors.white, size: 40),
+              ),
             ),
-          ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('Error')),
-        )
+            const SizedBox(height: DesignTokens.spaceLarge),
+            Text(
+              localizationService.getOnboarding('orientation_title'),
+              style: DesignTokens.textHeading,
+            ),
+            const SizedBox(height: DesignTokens.spaceMedium),
+            const Text("Hold phone portrait.\nSwipe Right to continue.", textAlign: TextAlign.center, style: DesignTokens.textBody)
+          ],
+        ),
       ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, __) => const Center(child: Text('Error')),
     );
   }
 }

@@ -2,47 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/localization/localization_provider.dart';
+import '../../../../core/design/design_tokens.dart';
+import '../../../learning/presentation/widgets/blind_first_screen.dart';
 
-class LanguageSelectionScreen extends ConsumerWidget {
+class LanguageSelectionScreen extends BlindFirstScreen {
   const LanguageSelectionScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void onSwipeRight(BuildContext context, WidgetRef ref) {
+    super.onSwipeRight(context, ref);
+    ref.read(localeProvider.notifier).setLocale('english');
+    context.go('/orientation');
+  }
+
+  @override
+  void onSwipeLeft(BuildContext context, WidgetRef ref) {
+    super.onSwipeLeft(context, ref);
+    ref.read(localeProvider.notifier).setLocale('swahili');
+    context.go('/orientation');
+  }
+
+  @override
+  Widget buildContent(BuildContext context, WidgetRef ref) {
     final localizationAsyncValue = ref.watch(localizationServiceProvider);
 
-    return Scaffold(
-      body: SafeArea(
-        child: localizationAsyncValue.when(
-          data: (localizationService) => Column(
-            children: [
-              const Spacer(),
-              Text(
-                localizationService.getOnboarding('language_title'),
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(localeProvider.notifier).setLocale('english');
-                  context.go('/orientation');
-                },
-                child: Text(localizationService.getOnboarding('language_english')),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(localeProvider.notifier).setLocale('swahili');
-                  context.go('/orientation');
-                },
-                child: Text(localizationService.getOnboarding('language_swahili')),
-              ),
-              const Spacer(),
-            ],
-          ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('Error loading translations')),
-        )
-      ),
+    return SafeArea(
+      child: localizationAsyncValue.when(
+        data: (localizationService) => Column(
+          children: [
+            const Spacer(),
+            Text(
+              localizationService.getOnboarding('language_title'),
+              style: DesignTokens.textDisplay,
+            ),
+            const SizedBox(height: DesignTokens.spaceGiant),
+            const Text(
+               'Swipe Right for English\nSwipe Left for Kiswahili',
+               textAlign: TextAlign.center,
+               style: DesignTokens.textBody,
+            ),
+            const Spacer(),
+          ],
+        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, __) => const Center(child: Text('Error loading translations')),
+      )
     );
   }
 }
