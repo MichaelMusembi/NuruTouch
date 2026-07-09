@@ -1,0 +1,18 @@
+{
+    "phase_1_welcome": "Habari {LEARNER_NAME}. Mimi ni Mwalimu Amina. Leo tutajifunza herufi yetu ya kwanza ya Braille. Jina lake ni A. Tutasikiliza. Tutahisi. Tutagusa. Halafu utanionyesha ulichojifunza. Uko tayari?",
+    "phase_2_intro": "Leo tutajifunza herufi A. Herufi A hutumia nukta moja tu. Nukta hiyo ni Nukta Moja.",
+    "phase_3_hear": "Kwanza tusikilize. Nitaitamka herufi. A... A... A... Sikiliza kwa makini.",
+    "phase_4_feel": "Sasa nitakufanya uhisi mtetemo.",
+    "phase_4_ask": "Ulihisi hiyo?",
+    "phase_5_discover": "Weka kidole kimoja popote kwenye skrini. Chunguza polepole.",
+    "phase_6_mastery": "Je, unaweza kupata Nukta Moja?",
+    "phase_7_build": "Unakumbuka ni nukta gani inayotengeneza herufi A?",
+    "phase_8_listen_repeat": "Sikiliza kwa makini. A. Sasa wewe sema.",
+    "phase_9_recognition": "Nitacheza mtetemo. Niambie ni herufi gani.",
+    "phase_10_practice": "Hebu tufanye pamoja. Tengeneza herufi A mara tatu.",
+    "phase_11_real_world": "Herufi A inaanza neno Alama. Sikiliza. Alama.",
+    "phase_12_challenge": "Hebu tuone kama unakumbuka.",
+    "phase_13_celebration": "Umeweza! Leo umejifunza herufi A. Najivunia sana wewe.",
+    "phase_14_reflection": "Leo umejifunza: Herufi A, Nukta Moja, Nukta moja ya Braille. Kesho tutajifunza herufi nyingine nzuri.",
+    "phase_16_dashboard": "Kazi nzuri leo. Bustani yako imekua. Rudi kesho kwa tukio jingine."
+}

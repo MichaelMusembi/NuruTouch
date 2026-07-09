@@ -1,0 +1,18 @@
+{
+    "phase_1_welcome": "Hello, {LEARNER_NAME}. I'm Teacher Amina. Today we are going to learn our very first Braille letter. Its name is A. We will listen. We will feel. We will touch. Then you will show me what you have learned. Are you ready?",
+    "phase_2_intro": "Today's letter is A. The letter A is made using one Braille dot. Only one dot is raised. That dot is Dot One.",
+    "phase_3_hear": "First, let's listen. I'll say the letter. A... A... A... Listen carefully.",
+    "phase_4_feel": "Now I'm going to let you feel the vibration.",
+    "phase_4_ask": "Did you feel that?",
+    "phase_5_discover": "Put one finger anywhere on the screen. Slowly explore the surface.",
+    "phase_6_mastery": "Can you find Dot One?",
+    "phase_7_build": "Do you remember which dot makes the letter A?",
+    "phase_8_listen_repeat": "Listen carefully. A. Now you say it.",
+    "phase_9_recognition": "I'm going to play a vibration. Tell me which letter it is.",
+    "phase_10_practice": "Let's do it together. Make the letter A three times.",
+    "phase_11_real_world": "The letter A begins the word Apple. Listen. Apple.",
+    "phase_12_challenge": "Let's see if you remember.",
+    "phase_13_celebration": "You did it! Today you learned the letter A. I'm so proud of you.",
+    "phase_14_reflection": "Today you learned: Letter A, Dot One, One Braille dot. Tomorrow we'll learn another exciting letter.",
+    "phase_16_dashboard": "Great work today. Your garden has grown. Come back tomorrow for another adventure."
+}

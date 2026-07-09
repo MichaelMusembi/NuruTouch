@@ -1,0 +1,7 @@
+{
+  "lesson_intro": "Today we are learning the letter {LETTER}.",
+  "touch_dot": "You are touching Dot {DOT}.",
+  "success": "Wonderful! You learned the letter {LETTER}.",
+  "retry": "Let's try once more.",
+  "celebration": "Fantastic! You completed today's lesson."
+}

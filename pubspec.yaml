@@ -1,0 +1,34 @@
+name: nurutouch
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  sqflite: ^2.4.2
+  path_provider: ^2.1.6
+  shared_preferences: ^2.5.5
+  go_router: ^17.3.0
+  flutter_riverpod: ^3.3.2
+  vibration: ^3.2.0
+  fl_chart: ^1.2.0
+  flutter_tts: ^4.2.5
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/localization/english/
+    - assets/localization/swahili/
+    - assets/data/
