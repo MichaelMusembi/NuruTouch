@@ -14,33 +14,35 @@ class DesignTokens {
   static const double touchTargetLarge = 120.0;
 
   // Colors
-  static const Color colorPrimary = Colors.blue;
-  static const Color colorBackground = Color(0xFFF5F5F5);
+  static const Color colorPrimary = Color(0xFF1967D2); // Deep blue from screenshots
+  static const Color colorBackground = Color(0xFFF8F9FA); // Off-white/light gray
   static const Color colorSurface = Colors.white;
-  static const Color colorOnSurface = Colors.black87;
-  static const Color colorDotInactive = Color(0xFF1A1C29);
-  static const Color colorDotActive = Colors.blue;
-  static const Color colorAccent = Colors.amber;
+  static const Color colorOnSurface = Color(0xFF111111); // Near black for text
+  static const Color colorDotInactive = Color(0xFF171A21); // Dark blue/black for inactive dots
+  static const Color colorDotActive = Color(0xFF1967D2);
+  static const Color colorAccent = Color(0xFFFFC107); // Yellow for smiley/accent
 
   // Typography
   static const TextStyle textDisplay = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
+    fontSize: 36,
+    fontWeight: FontWeight.w800,
     color: colorOnSurface,
+    letterSpacing: -0.5,
     height: 1.2,
   );
 
   static const TextStyle textHeading = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
     color: colorPrimary,
+    letterSpacing: -0.3,
     height: 1.3,
   );
 
   static const TextStyle textBody = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.normal,
-    color: colorOnSurface,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Color(0xFF5F6368),
     height: 1.5,
   );
 

@@ -12,7 +12,7 @@ class DiscoverDotsScreen extends BlindFirstScreen {
   @override
   void onSwipeRight(BuildContext context, WidgetRef ref) {
     super.onSwipeRight(context, ref);
-    context.go('/profile-setup');
+    context.go('/gesture-tap');
   }
 
   @override
@@ -22,14 +22,14 @@ class DiscoverDotsScreen extends BlindFirstScreen {
     return Scaffold(
       appBar: AppBar(
         title: localizationAsyncValue.when(
-          data: (loc) => Text(loc.getOnboarding('discover_title'), style: DesignTokens.textHeading),
+          data: (loc) => Text(loc.getOnboarding('discover_title'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DesignTokens.colorPrimary)),
           loading: () => const Text('...'),
           error: (_,__) => const Text('Error'),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 80.0),
+        padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 80.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -64,11 +64,10 @@ class DiscoverDotsScreen extends BlindFirstScreen {
     return GestureDetector(
       onTap: () {
           ref.read(hapticLanguageProvider).playNavigate();
-          // In a real app we'd announce "Dot $dotNumber" here via AudioManager
       },
       child: Container(
-        width: 100,
-        height: 100,
+        width: 110,
+        height: 110,
         decoration: const BoxDecoration(
           color: DesignTokens.colorDotInactive,
           shape: BoxShape.circle,
